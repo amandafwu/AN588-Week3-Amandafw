@@ -53,7 +53,7 @@ Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
 x <- 0:30
 l <- 15
 probset <- dpois(x, lambda = l)
-barplot(probset, names.arg = x, space = 0, xlab = "x", ylab = "Pr(X = x)", main = "Probability Mass Function")
+barplot(probset, names.arg = x, space = 0, xlab = "# of calls", ylab = "Probability", main = "Probability Mass Function")
 ```
 
 
@@ -75,4 +75,4 @@ lambda <- 15
 stimulation <- rpois(x, lambda)
 hist(stimulation, xlab = "# of calls", ylab = "probability", main = "2 years of data", xlim = c(0,30))
 ```
-
+The stimulated results look fairly simple aside from some irregularities which would happen as the results were randomized. It would look more similar to the probability mass function if there were more samples. 
