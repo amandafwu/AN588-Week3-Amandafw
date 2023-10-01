@@ -18,11 +18,9 @@ Every Saturday morning, at the same time, a primatologist goes and sits in the f
 ## Question 1
 What is the probability that she will hear more than 8 calls during any given session?
 ```{r Question 1}
-x <- 8
-l <- 15
-probset <- 1 - dpois(x, lambda = l)
-sum(probset)
-probset <- ppois(x, lambda =l, upper.tri(TRUE))
+x <- 8 
+l <- 15 #this represents the lambda which uses the mean 
+probset <- ppois(x, lambda =l, upper.tri(TRUE)) #used ppois for distribution function and upper.tri(TRUE) restricts the value to account for values greater than or equal 8; code was written with the help of erin 
 probset
 ```
 
@@ -30,9 +28,9 @@ probset
 ## Question 2
 What's the probability that she will hear no calls in one session?
 ```{r Question 2}
-x <- 0
-l <- 15
-probset <- dpois(x, lambda = l)
+x <- 0 #no calls, exact value
+l <- 15 #mean
+probset <- dpois(x, lambda = l) #used dpois because of module 8
 probset
 ```
 
@@ -40,29 +38,29 @@ probset
 ## Question 3
 What is the probability that she will hear exactly 3 calls in a session?
 ```{r Question 3}
-x <- 3
+x <- 3 #exactly three calls
 l <- 15
-probset <- dpois(x, lambda = l)
-probset
+probset <- dpois(x, lambda = l) #same code as the last question
+probset 
 ```
 
 
 ## Question 4
 Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
 ```{r Question 4}
-x <- 0:30
+x <- 0:30 #accounted for the range 0-30
 l <- 15
 probset <- dpois(x, lambda = l)
-barplot(probset, names.arg = x, space = 0, xlab = "# of calls", ylab = "Probability", main = "Probability Mass Function")
+barplot(probset, names.arg = x, space = 0, xlab = "# of calls", ylab = "Probability", main = "Probability Mass Function") #modeled after the code in module 8 for barplots in the poisson section
 ```
 
 
 ## Question 5
 Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions). 
 ```{r Question 5}
-x <- 104
+x <- 104 #number of results
 lambda <- 15
-stimulation <- rpois(x, lambda)
+stimulation <- rpois(x, lambda) #rpois is used to generate random results based on the lambda
 stimulation
 ```
 
@@ -72,7 +70,17 @@ Plot the simulated results using hist() and use xlim() to set the horizontal lim
 ```{r Question 6}
 x <- 104
 lambda <- 15
-stimulation <- rpois(x, lambda)
-hist(stimulation, xlab = "# of calls", ylab = "probability", main = "2 years of data", xlim = c(0,30))
+stimulation <- rpois(x, lambda) #same as question 5
+hist(stimulation, xlab = "# of calls", ylab = "Probability", main = "2 years of data", xlim = c(0,30), freq = FALSE) #added xlim = c(0,30) to set the horizontal limits; modeled the code to be similar to question 4
 ```
 The stimulated results look fairly simple aside from some irregularities which would happen as the results were randomized. It would look more similar to the probability mass function if there were more samples. 
+
+## Reflection
+* 5 challenges I faced: 
+  + I had some difficulty with challenge 1 as I wasn't too familar with ppois and its function so I asked one of my classmates Erin who had shared a video to me and showed me the differences in poissen functions; she showed me to add upper.tri(TRUE) to answer the first question
+  + I initially had difficulty adding the image because I wasn't sure how to get the file path from a jpeg file but I figured out that you could double click and go to "get info" to copy the file path; in addition, its required to add a small text in order for the function to work
+  + I had some difficulty adding the table of contents and the theme in the yammel so I had to look up how to add it with the prettydoc as the order of the output functions matter; the toc had to be under prettydoc or else the theme wouldn't show
+  + Intially, I didn't read the last question correctly where the histogram was supposed to be for the stimulated results but I wasn't sure how to make the graph not be the same as question 4
+  + I didn't use rpois in module 8 so I wasn't too sure how to generate random results for question 5 but the help function was really helpful in showing how to enter the function and rpois wasn't too difficult to code
+
+Overall, this homework assignment was intimidating at first but wasn't too difficult to figure out at the end. I mainly used module 8's poisson distribution section and the help section in R to help me figure out the code for the homework. I felt confident in doing this homework and it helped me feel more comfortable doing poisson distribution. 
