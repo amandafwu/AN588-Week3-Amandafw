@@ -1,0 +1,91 @@
+---
+title: "Amandafw_OriginalHomeworkCode_02"
+author: "Amanda Wu"
+date: "2023-09-28"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: true
+    
+---
+
+![Me when my code doesn't work](/Users/amandawu/Desktop/titi-monkey.jpeg)
+
+## Prompt
+Every Saturday morning, at the same time, a primatologist goes and sits in the forest to listen for titi monkey calls, counting the number of calls they hear in a 2 hour window from 5am to 7am. Based on previous knowledge, she believes that the mean number of calls she will hear in that time is exactly 15. Let X represent the appropriate Poisson random variable of the number of calls heard in each monitoring session.
+
+## Question 1
+What is the probability that she will hear more than 8 calls during any given session?
+```{r Question 1}
+x <- 8
+l <- 15
+probset <- 1 - dpois(x, lambda = l)
+sum(probset)
+probset <- ppois(x, lambda =l, upper.tri(TRUE))
+probset
+```
+
+
+## Question 2
+What's the probability that she will hear no calls in one session?
+```{r Question 2}
+x <- 0
+l <- 15
+probset <- dpois(x, lambda = l)
+probset
+```
+
+
+## Question 3
+What is the probability that she will hear exactly 3 calls in a session?
+```{r Question 3}
+x <- 3
+l <- 15
+probset <- dpois(x, lambda = l)
+probset
+```
+
+
+## Question 4
+Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
+```{r Question 4}
+x <- 0:30
+l <- 15
+probset <- dpois(x, lambda = l)
+barplot(probset, names.arg = x, space = 0, xlab = "# of calls", ylab = "Probability", main = "Probability Mass Function")
+```
+
+
+## Question 5
+Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions). 
+```{r Question 5}
+x <- 104
+lambda <- 15
+stimulation <- rpois(x, lambda)
+stimulation
+```
+
+
+## Question 6
+Plot the simulated results using hist() and use xlim() to set the horizontal limits to be from 0 to 30. How does your histogram compare to the shape of the probability mass function you plotted above?
+```{r Question 6}
+x <- 104
+lambda <- 15
+stimulation <- rpois(x, lambda)
+hist(stimulation, xlab = "# of calls", ylab = "probability", main = "2 years of data", xlim = c(0,30))
+```
+
+The stimulated results look fairly simple aside from some irregularities which would happen as the results were randomized. It would look more similar to the probability mass function if there were more samples. 
+
+## Peer Commentary
+
+* That baby titi monkey is adorable.
+* In your response to question 1, I notice that you did two analyses that gave different answers. I am not sure, but I think the second one is correct as the first function using 1-dpois would give the probability of observing any number of calls other than 8.
+* Also regarding your answer for question 1, I think it is cool that you used the upper.tri argument to get the probability for more for than 8 calls. I see that you used the 1 - (reciprocal/complement) method in the first analysis, so it is nice to have a note of how to get the answer more than one way. The upper.tri method looks easier to keep track of in the code whereas the 1-ppois() method risks the 1- getting confused or lost.
+* Your responses to questions 2 and 3 look good. I notice that you save values into the variables (x,l, etc) whereas I put those values directly into the function. I think your method is more useful if you had to copy the code and reapply it in other situations.
+* Your barplot for question 4 looks good. The only suggestion I might make is, for clarity, it might be useful to give it a more specific title and y-axis label. Something you and I could both do is to extend the y-axis limit so it goes a little above the highest bar in the plot for readability sake. 
+* Questions 5 and 6 look well-answered. One comment I have is that every time your code for question 5 is run, different random numbers will be produced, so when I post this version with the commentary, the evaluations of questions 5 and 6 will look different. If you want, you can set what seed your simulated data uses so that it generates the same random numbers every time it is run. That could be especially useful when sharing code with a team.
+* Comparing your histogram and mine, I realized that I assumed that the histogram displays frequency/counts of each number whereas you labeled the y-axis as probability as in relative frequency of each number of calls. I am not sure, but looking into the hist() function, I think it defaults to frequency. If that is true, it would be more accurate to label your y-axis as frequency or use the freq=FALSE argument to have the histogram display probability densities.
+* I agree with your assessment at the end of question 6 comparing the barplot and simulated histogram.
+* Nice efficient code overall. Don't forget to annotate, either within the chunks or in the text so that you have notes explaining what various parts of the code are doing.
